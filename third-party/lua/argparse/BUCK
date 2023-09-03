@@ -1,0 +1,24 @@
+
+load("//bucktools/lua:defs.bzl", "lua_library")
+load("//bucktools/util:util.bzl", "select_file")
+
+git_fetch(
+    name = 'argparse-repo',
+    repo = 'https://github.com/luarocks/argparse',
+    rev = '27967d7b52295ea7885671af734332038c132837',
+)
+
+select_file(
+    name = "argparse.lua",
+    filter = "argparse.lua",
+    srcs = [":argparse-repo"],
+    out = "argparse.lua",
+)
+
+lua_library(
+    name = "argparse",
+    srcs = [
+        ":argparse.lua",
+    ],
+    visibility = ["PUBLIC"],
+)

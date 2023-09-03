@@ -1,0 +1,18 @@
+
+load("//bucktools/teal/defs.bzl", "teal_library")
+
+teal_library(
+    name = "lib1",
+    srcs = glob(["lib1/**/*.tl"], exclude = ["lib1/**/tests/*.tl"]),
+    visibility = ["PUBLIC"],
+)
+
+teal_library(
+    name = "lib1-tests",
+    srcs = glob(["lib1/**/tests/*.tl"]),
+    visibility = ["PUBLIC"],
+    deps = [
+        ":lib1",
+    ],
+)
+

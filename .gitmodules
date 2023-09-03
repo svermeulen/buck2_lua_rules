@@ -1,3 +1,15 @@
 [submodule "prelude"]
 	path = prelude
 	url = https://github.com/facebook/buck2-prelude.git
+[submodule "third-party/lua/luajit"]
+	path = third-party/lua/luajit
+	url = https://github.com/svermeulen/LuaJIT
+	branch = sverm/lua-rules-example
+[submodule "third-party/lua/tl"]
+	path = third-party/lua/tl
+	url = https://github.com/svermeulen/tl
+	branch = sverm/lua-rules-example
+[submodule "third-party/lua/luafilesystem"]
+	path = third-party/lua/luafilesystem
+	url = https://github.com/svermeulen/luafilesystem
+    branch = sverm/lua-rules-example

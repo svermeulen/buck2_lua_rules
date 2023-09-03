@@ -1,0 +1,27 @@
+
+native.python_bootstrap_binary(
+    name = "select_file.py",
+    main = "select_file.py",
+    visibility = ["PUBLIC"],
+)
+
+native.command_alias(
+    name = "select_file",
+    exe = ":select_file.py",
+    args = [],
+    visibility = ["PUBLIC"],
+)
+
+native.python_bootstrap_binary(
+    name = "select_files.py",
+    main = "select_files.py",
+    visibility = ["PUBLIC"],
+)
+
+native.command_alias(
+    name = "select_files",
+    exe = ":select_files.py",
+    args = [],
+    visibility = ["PUBLIC"],
+)
+

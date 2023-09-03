@@ -1,0 +1,9 @@
+
+load("//bucktools/lua/defs.bzl", "lua_binary")
+
+lua_binary(
+    name = "app1",
+    main = "app1.main",
+    srcs = glob(["app1/*.lua"]),
+)
+

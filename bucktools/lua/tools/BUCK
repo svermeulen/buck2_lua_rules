@@ -1,0 +1,16 @@
+
+prelude = native
+
+prelude.python_bootstrap_binary(
+    name = "make_lua_linktree_dir.py",
+    main = "make_lua_linktree_dir.py",
+    visibility = ["PUBLIC"],
+)
+
+prelude.command_alias(
+    name = "make_lua_linktree_dir",
+    exe = ":make_lua_linktree_dir.py",
+    args = [],
+    visibility = ["PUBLIC"],
+)
+

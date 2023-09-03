@@ -1,0 +1,18 @@
+
+load("//bucktools/teal/defs.bzl", "teal_library")
+load("//bucktools/lua/defs.bzl", "lua_binary")
+
+teal_library(
+    name = "app1-lib",
+    srcs = glob(["app1/**/*.tl"]),
+    deps = [
+        "//examples/teal/lib1:lib1",
+    ],
+)
+
+lua_binary(
+    name = "app1",
+    deps = [":app1-lib"],
+    main = "app1.main",
+)
+
