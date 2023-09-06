@@ -4,6 +4,11 @@ load("@prelude//utils:arglike.bzl", "ArgLike")  # @unused Used as a type
 load("@prelude//:asserts.bzl", "asserts")
 load("@prelude//decls:common.bzl", "buck")
 
+load(
+    "//bucktools/lua/toolchains:lua.bzl",
+    "LuaToolchainInfo",
+)
+
 LuaManifestInfo = record(
     # The actual manifest file (in the form of a JSON file).
     manifest = field(Artifact),
@@ -190,7 +195,9 @@ def _lua_binary_impl(ctx: AnalysisContext):
     bootstrap_lua_file = ctx.actions.declare_output("_bootstrap.lua")
     ctx.actions.write(bootstrap_lua_file, bootstrap_lua)
 
-    run_args = cmd_args(ctx.attrs._run_lua[RunInfo])
+    lua_toolchain = ctx.attrs._lua_toolchain[LuaToolchainInfo]
+
+    run_args = cmd_args(lua_toolchain.lua_exe[RunInfo])
     run_args.add("--linktreedir")
     run_args.add(linktree_dir)
     run_args.add(bootstrap_lua_file)
@@ -283,7 +290,7 @@ lua_library = rule(impl = _lua_library_impl, attrs = {
 def lua_binary_hidden_args():
     return {
         "_linktree_generator": attrs.default_only(attrs.dep(providers = [RunInfo], default = "//bucktools/lua/tools:make_lua_linktree_dir")),
-        "_run_lua": attrs.default_only(attrs.dep(providers = [RunInfo], default = "//third-party/lua/luajit:run_luajit")),
+        "_lua_toolchain": attrs.default_only(attrs.toolchain_dep(providers = [LuaToolchainInfo], default = "toolchains//:lua")),
     }
 
 lua_binary = rule(impl = _lua_binary_impl, attrs = (

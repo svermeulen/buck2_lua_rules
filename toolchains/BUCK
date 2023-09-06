@@ -1,4 +1,5 @@
 
+load("@root//bucktools/lua/toolchains:lua.bzl", "system_luajit_toolchain")
 load("@prelude//toolchains:cxx.bzl", "system_cxx_toolchain")
 load("@prelude//toolchains:python.bzl", "system_python_bootstrap_toolchain", "system_python_toolchain")
 load("@prelude//toolchains:genrule.bzl", "system_genrule_toolchain")
@@ -20,6 +21,11 @@ system_python_bootstrap_toolchain(
 
 system_python_toolchain(
     name = "python",
+    visibility = ["PUBLIC"],
+)
+
+system_luajit_toolchain(
+    name = "lua",
     visibility = ["PUBLIC"],
 )
 
